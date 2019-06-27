@@ -32,6 +32,8 @@ LIRI is a Language Interpretation and Recognition Interface. LIRI is a command l
           Example 1: Run the movie-this command
           node liri.js concert-this <movie name>
           Output: The system will display details regarding the movie
+         ![alt text](https://github.com/helanjose/liri-node-app/blob/master/screenshorts/concert-this.JPG)
+          
           
 
 
