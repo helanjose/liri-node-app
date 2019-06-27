@@ -5,6 +5,7 @@ var key = require("./key.js");
 var Spotify = require('node-spotify-api');
 var moment = require("moment")
 var axios = require("axios");
+var fs = require("fs");
 var command=process.argv[2];
 var term1=process.argv.slice(3);
 var term=term1.join('+');
@@ -52,25 +53,77 @@ else if (command=='concert-this')
 }
 else if(command=='spotify-it')
 {
-  //console.log("spotify");
+  //console.log(typeof(term));
+  if(term==='')
+      {
+        
+          var spotify = new Spotify(key.spotify);
+  
+  
+  spotify.search({ type: 'track', query: "The Sign" }, function(err, data) {
+    if (err) {
+      return console.log('Error occurred: ' + err);
+    }
+   
+    console.log("song name:"+data.tracks.items[0].name);
+    console.log("album name:"+data.tracks.items[0].album.name);
+    console.log("artist name:"+data.tracks.items[0].album.artists[0].name);
+   
+    //console.log(`band: + ${JSON.stringify(data)}`);
+    console.log("preview link:"+data.tracks.items[0].href);
+  });
+
+ }
+
+
+
+
+  
+      
+  else{
+    spotifys(term)
+  }
+  
+ 
+}
+else if(command=='do-what-it-says'){
+
+  fs.readFile("random.txt", "utf8", function(error, data) {
+
+    // If the code experiences any errors it will log the error to the console.
+    if (error) {
+      return console.log(error);
+    }
+    console.log(data); 
+    spotifys(data); 
+
+  });
+
+}
+
+
+
+ function spotifys(val)
+ {
+   var song=val;
   var spotify = new Spotify(key.spotify);
-  //console.log(spotify);
-  var terms=term.split("+").join(" ");
-  console.log(terms);
+
+  var terms=song.split("+").join(" ");
+  //console.log(terms);
   spotify.search({ type: 'track', query: terms }, function(err, data) {
     if (err) {
       return console.log('Error occurred: ' + err);
     }
    
-    console.log("song name"+data.tracks.items[0].name);
-    console.log("album name"+data.tracks.items[0].album.name);
+    console.log("song name:"+data.tracks.items[0].name);
+    console.log("album name:"+data.tracks.items[0].album.name);
+    console.log("artist name:"+data.tracks.items[0].album.artists[0].name);
+   
+    //console.log(`band: + ${JSON.stringify(data)}`);
+    console.log("preview link:"+data.tracks.items[0].href);
   });
 
-  
-
-}
-
- 
+ }
 
 
 
