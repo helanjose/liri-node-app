@@ -56,7 +56,18 @@ LIRI is a Language Interpretation and Recognition Interface. LIRI is a command l
             output: read a file and spotify the info inside the file
             
             
-          
+### TECHNOLOGIES USED
+* Javascript
+* Nodejs
+*Node packages:
+* Node-Spotify-API
+*Moment
+* DotEnv
+### APIs used:
+Bands in Town
+OMDB
+Git
+GitHub         
          
          
           
