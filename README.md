@@ -1,4 +1,5 @@
 # liri-node-app
+<<<<<<< HEAD
 
 
 Creator: Helan Jose
@@ -34,3 +35,6 @@ LIRI is a Language Interpretation and Recognition Interface. LIRI is a command l
 
 
 
+=======
+------------------------------------
+>>>>>>> 2bfc17b987f5d7143a16e253f9cffd6c8cb252a6
