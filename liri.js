@@ -15,8 +15,9 @@ var term=term1.join('+');
 if(command=='movie-this')
 
   {
+    //console.log(typeof(term));
 
-    if(term===undefined)
+    if(term==='')
       {
     
           console.log("If you haven't watched 'Mr. Nobody', then you should: http://www.imdb.com/title/tt0485947/"+
@@ -24,7 +25,7 @@ if(command=='movie-this')
   
       }
     else{
-        movie();
+        movie(term);
     }
 
  
@@ -32,23 +33,8 @@ if(command=='movie-this')
 
 else if (command=='concert-this')
 {
-  axios.get("https://rest.bandsintown.com/artists/" + term + "/events?app_id=codingbootcamp").then(
-    function(response) {
-
-   
-    //console.log(`band: + ${JSON.stringify(response.data[0].datetime)}`);
-  
-    var venue_name=response.data[0].venue.name;
-    var city=response.data[0].venue.city;
-    var region=response.data[0].venue.region;
-    var country=response.data[0].venue.country;
-    var date=response.data[0].datetime;
-    var date_converted=moment(date).format('MM/DD/YYYY');
-    console.log("venue name:"+venue_name+'\n'+"location:"+city+","+region+","+country+'\n'+"Date:"+date_converted);
-
-}
-);
-
+ concert(term);
+ 
   
 }
 else if(command=='spotify-it')
@@ -64,7 +50,8 @@ else if(command=='spotify-it')
     if (err) {
       return console.log('Error occurred: ' + err);
     }
-   
+   console.log("song information");
+   console.log("*********************");
     console.log("song name:"+data.tracks.items[0].name);
     console.log("album name:"+data.tracks.items[0].album.name);
     console.log("artist name:"+data.tracks.items[0].album.artists[0].name);
@@ -76,9 +63,6 @@ else if(command=='spotify-it')
  }
 
 
-
-
-  
       
   else{
     spotifys(term)
@@ -114,7 +98,8 @@ else if(command=='do-what-it-says'){
     if (err) {
       return console.log('Error occurred: ' + err);
     }
-   
+    console.log("song information");
+    console.log("*********************");
     console.log("song name:"+data.tracks.items[0].name);
     console.log("album name:"+data.tracks.items[0].album.name);
     console.log("artist name:"+data.tracks.items[0].album.artists[0].name);
@@ -125,6 +110,32 @@ else if(command=='do-what-it-says'){
 
  }
 
+ function concert(val)
+ {
+   band=val;
+    band=band.split("+").join(" ");
+
+  // console.log("band"+band);
+   axios.get("https://rest.bandsintown.com/artists/" + term + "/events?app_id=codingbootcamp").then(
+     function(response) {
+ 
+    
+     //console.log(`band: + ${JSON.stringify(response.data[0].datetime)}`);
+   
+     var venue_name=response.data[0].venue.name;
+     var city=response.data[0].venue.city;
+     var region=response.data[0].venue.region;
+     var country=response.data[0].venue.country;
+     var date=response.data[0].datetime;
+     var date_converted=moment(date).format('MM/DD/YYYY');
+     console.log("Event information");
+    console.log("*********************");
+     console.log("venue name:"+venue_name+'\n'+"location:"+city+","+region+","+country+'\n'+"Date:"+date_converted);
+ 
+ }
+ );
+ 
+ }
 
 
 
@@ -134,11 +145,11 @@ else if(command=='do-what-it-says'){
 
 
 
-function movie()
+function movie(val)
 {
 
-  
-      axios.get("http://www.omdbapi.com/?apikey=trilogy&t="+term).then(
+  var movie=val;
+      axios.get("http://www.omdbapi.com/?apikey=trilogy&t="+movie).then(
       function(response) {
 
      
@@ -151,6 +162,8 @@ function movie()
       var rotten_tomato_rating=response.data.Ratings[1].Value;
       var imbd_rating=response.data.imdbRating;
       var language=response.data.Language;
+      console.log("Movie information");
+   console.log("*********************");
       console.log("Title of the movie:"+title+'\n'+"Year the movie came out:"+year+'\n'+
       "Actors in the movie:"+actors+'\n'+"plot:"+plot+'\n'+
       "country:"+country+'\n'+"Rotten Tomatoes Rating: "+rotten_tomato_rating+'\n'
