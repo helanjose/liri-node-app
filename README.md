@@ -32,7 +32,7 @@ LIRI is a Language Interpretation and Recognition Interface. LIRI is a command l
           Example 1: Run the movie-this command
           node liri.js movie-this <movie name>
           Output: The system will display details regarding the movie
-          ![concert-this](https://user-images.githubusercontent.com/48775482/60283078-38c22800-98bd-11e9-8eb4-ed9c89a07d8c.JPG)
+          ![concert-this](screenshorts/concert-this.JPG)
           
           Example 2: Run the movie-this command without movie name
           node liri.js movie-this 
